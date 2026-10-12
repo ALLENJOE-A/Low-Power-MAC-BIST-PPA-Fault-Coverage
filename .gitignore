@@ -1,18 +1,113 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Other files and folders
-.settings/
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.jou
+*.cmd
+core
+core.*
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Simulation outputs
+simv
+simv.daidir/
+csrc/
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+*.wlf
+*.vpd
+transcript
+work/
+vsim.wlf
+xsim.dir/
+xcelium.d/
+INCA_libs/
+*.shm/
+*.trn
+*.dsn
+*.key
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Compiled HDL and simulation artifacts
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.class
+*.pyc
+__pycache__/
+*.vvp
+*.out
+
+# Synthesis and implementation outputs
+*.edif
+*.edf
+*.dcp
+*.sdf
+*.spef
+*.spf
+*.sdc.bak
+*.mapped.v
+*.synth.v
+*.net
+*.blif
+*.il
+*.json.tmp
+
+# Physical design and layout outputs
+*.gds
+*.gdsii
+*.oas
+*.def
+*.lef
+*.odb
+*.db
+*.lib.gz
+*.spef.gz
+*.rpt.tmp
+
+# FPGA and vendor tool outputs
+vivado*.jou
+vivado*.log
+quartus_sh_compile.log
+db/
+incremental_db/
+output_files/
+xcelium.d/
+
+# Python analysis outputs
+.ipynb_checkpoints/
+venv/
+.venv/
+env/
+
+# Local datasets and generated plots
+# Keep reviewed, final figures and result CSVs in version control.
+data/generated/
+results/tmp/
+figures/generated_tmp/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Preserve project documentation and selected evidence
+!important_results.csv
+!results/**/*.csv
+!figures/**/*.png
+!figures/**/*.svg
