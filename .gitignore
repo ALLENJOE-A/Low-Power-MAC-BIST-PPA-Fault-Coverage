@@ -7,7 +7,12 @@ Thumbs.db
 *.swo
 *~
 
-# Logs and temporary files
+# Project Archives & Local Reference Documents
+archive/
+*.zip
+*.docx
+
+# EDA and Simulation outputs
 *.log
 *.tmp
 *.temp
@@ -17,8 +22,6 @@ Thumbs.db
 *.cmd
 core
 core.*
-
-# Simulation outputs
 simv
 simv.daidir/
 csrc/
@@ -38,6 +41,7 @@ INCA_libs/
 *.trn
 *.dsn
 *.key
+modelsim.ini
 
 # Compiled HDL and simulation artifacts
 *.o
@@ -50,6 +54,11 @@ INCA_libs/
 __pycache__/
 *.vvp
 *.out
+*.qdb
+*.qpg
+*.qtl
+_info
+_vmake
 
 # Synthesis and implementation outputs
 *.edif
@@ -65,27 +74,13 @@ __pycache__/
 *.blif
 *.il
 *.json.tmp
-
-# Physical design and layout outputs
-*.gds
-*.gdsii
-*.oas
-*.def
-*.lef
-*.odb
-*.db
-*.lib.gz
-*.spef.gz
 *.rpt.tmp
-
-# FPGA and vendor tool outputs
 vivado*.jou
 vivado*.log
 quartus_sh_compile.log
 db/
 incremental_db/
 output_files/
-xcelium.d/
 
 # Python analysis outputs
 .ipynb_checkpoints/
@@ -93,21 +88,18 @@ venv/
 .venv/
 env/
 
-# Local datasets and generated plots
-# Keep reviewed, final figures and result CSVs in version control.
-data/generated/
-results/tmp/
-figures/generated_tmp/
-
 # Secrets and local configuration
 .env
 .env.*
 !.env.example
 *.pem
-*.key
 
-# Preserve project documentation and selected evidence
-!important_results.csv
+# Explicitly preserve curated documentation, figures, and verified evidence
+!docs/**/*.pdf
 !results/**/*.csv
+!results/**/*.txt
 !figures/**/*.png
 !figures/**/*.svg
+!figures/**/*.jpeg
+!figures/**/*.jpg
+!verification/simulation/*.log
