@@ -20,6 +20,26 @@ This repository presents a complete, silicon-oriented evaluation of **six synthe
 
 ---
 
+## Architecture Block Diagram
+
+![BIST-enabled 16-bit MAC architecture](docs/images/architecture_block_diagram.png)
+
+*Figure 1: Proposed RTL-level architectural block diagram of the BIST-enabled 16-bit MAC unit with integrated low-power testing features.*
+
+The diagram above illustrates the **proposed RTL-level architecture** (not a synthesized gate-level schematic) of the self-testing 16-bit Multiply-Accumulate system:
+
+* **Two 16-bit LFSR Pattern Generators (TPG)**: Dual independent linear feedback shift registers (LFSR-A seeded with `0xACE1`, polynomial `0xB400`; LFSR-B seeded with `0x1B3D`, polynomial `0xD008`) generate pseudo-random 16-bit vector sequences (`a_tpg`, `b_tpg`) providing maximal-length stimulus with high toggle entropy and low cross-correlation.
+* **Test / Functional Operand Multiplexer (T/F MUX)**: Selects between normal operational mission inputs (`func_a`, `func_b`, `func_en`, `func_clr`) and BIST test stimulus under control of the central BIST controller's `test_mode` select signal.
+* **16×16 MAC Circuit Under Test (CUT)**: High-speed arithmetic core executing $16 \times 16$ unsigned multiplication accumulating into a 32-bit register (`acc <= acc + a * b`). The 32-bit output (`mac_out [31:0]`) is routed directly to the response analyzer cycle-by-cycle to ensure full internal observability.
+* **32-bit MISR Output Response Analyzer (ORA)**: Multiple-Input Signature Register configured with a 32-bit primitive characteristic polynomial (`0x00400007`), compacting continuous multi-cycle MAC outputs into a compact 32-bit signature with negligible aliasing probability ($P_{\text{alias}} \approx 2^{-32}$).
+* **Golden-Signature Comparator**: Dedicated registered hardware comparing the final compacted MISR signature against a pre-computed golden reference value (`GOLDEN = 0x1F5FAF38`), driving the primary `bist_pass` and `bist_done` status outputs.
+* **Five-State BIST Controller**: Synchronous FSM (`IDLE` $\rightarrow$ `INIT` $\rightarrow$ `RUN` $\rightarrow$ `FLUSH` $\rightarrow$ `DONE`) coordinating LFSR seed loading, accumulator clearing, $N$-cycle test stimulus injection, pipeline flush delay, and signature verification via coordinated control signals (`load`, `init`, `run`, `flush`, `en`, `clr`).
+* **Optional Low-Power Structures (Dotted Blocks)**: The dotted outlines in the block diagram designate modular low-power architectural mechanisms evaluated across the variants:
+  * **Integrated Clock Gating (`ICG (v2)`)**: Gating cells positioned on clock paths to the TPG, CUT, and MISR registers to eliminate dynamic clock-tree power dissipation when blocks are quiescent.
+  * **Operand Isolation (`AND iso. (v3)`)**: AND-gating isolation logic inserted between the multiplexer and MAC inputs to block spurious test-mode or idle switching activity from propagating into the multiplier logic array.
+
+---
+
 ## 2. Engineering Problem & Objectives
 
 1. **At-Speed In-System Testability**: Eliminate reliance on expensive high-pin-count ATE by integrating on-chip stimulus generation and signature compaction.
@@ -133,6 +153,8 @@ Low-Power-MAC-BIST-PPA-Fault-Coverage/
 ├── docs/                               # Engineering documentation & paper
 │   ├── project_report.pdf              # Full research paper
 │   ├── LINKEDIN_POST.md                # LinkedIn presentation & portfolio guide
+│   ├── images/                         # Architectural diagrams & paper figures
+│   │   └── architecture_block_diagram.png # Original proposed RTL-level BIST-MAC diagram
 │   ├── architecture/
 │   │   └── ARCHITECTURE.md             # Detailed block & register specs
 │   └── methodology/
