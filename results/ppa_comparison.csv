@@ -1,0 +1,7 @@
+variant,cells,area,area_vs_v1,slack_ns,path_delay_ns,delay_vs_v1,leakage_uW,internal_uW,switching_uW,total_power_uW,power_vs_v1
+v1_normal,1185,9926.74,+0.0%,N/A,N/A,N/A,42.732,612.542,229.083,884.357,+0.0%
+v2_clock_gating,1095,9508.18,-4.2%,N/A,N/A,N/A,41.658,581.265,219.826,842.749,-4.7%
+v3_operand_isolation,1217,10078.88,+1.5%,N/A,N/A,N/A,43.681,583.573,206.999,834.253,-5.7%
+v4_bus_inversion,1516,12354.88,+24.5%,N/A,N/A,N/A,56.118,872.138,381.808,1310.060,+48.1%
+v5_combined,1466,11979.46,+20.7%,N/A,N/A,N/A,55.524,813.638,349.995,1219.160,+37.9%
+v6_oi_cg,1127,9660.32,-2.7%,N/A,N/A,N/A,42.583,553.775,198.634,794.993,-10.1%

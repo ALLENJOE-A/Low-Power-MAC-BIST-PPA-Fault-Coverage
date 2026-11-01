@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" width="100%" height="100%" style="background:#0d1117;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f6feb"/>
+      <stop offset="100%" stop-color="#238636"/>
+    </linearGradient>
+    <linearGradient id="ctrlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="tpgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e38"/>
+      <stop offset="100%" stop-color="#0f1123"/>
+    </linearGradient>
+    <linearGradient id="cutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#132e2b"/>
+      <stop offset="100%" stop-color="#081c1a"/>
+    </linearGradient>
+    <linearGradient id="oraGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#311c2a"/>
+      <stop offset="100%" stop-color="#1c0f18"/>
+    </linearGradient>
+    <linearGradient id="cmpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b2313"/>
+      <stop offset="100%" stop-color="#1a1407"/>
+    </linearGradient>
+    <linearGradient id="lpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c3327"/>
+      <stop offset="100%" stop-color="#0c2016"/>
+    </linearGradient>
+
+    <!-- Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#d29922"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#bc8cff"/>
+    </marker>
+
+    <!-- Filters -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="30" y="20" width="1040" height="50" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="50" y="52" fill="#58a6ff" font-size="19" font-weight="700" letter-spacing="0.5">Low-Power BIST Architecture for 16-Bit MAC Unit</text>
+  <text x="760" y="51" fill="#8b949e" font-size="13">16x16 Multiplier | Dual LFSRs | 32-bit MISR | 99.898% FC</text>
+
+  <!-- Outer Enclosure: mac_bist_top -->
+  <rect x="30" y="85" width="1040" height="535" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="50" y="112" fill="#8b949e" font-size="13" font-weight="600" text-transform="uppercase" letter-spacing="1">Top-Level Synthesis Wrapper (mac_bist_top_v1..v6)</text>
+
+  <!-- 1. BIST Controller (FSM) -->
+  <g transform="translate(60, 135)" filter="url(#dropShadow)">
+    <rect width="210" height="455" rx="8" fill="url(#ctrlGrad)" stroke="#388bfd" stroke-width="2"/>
+    <rect width="210" height="36" rx="8" fill="#1f6feb" fill-opacity="0.2"/>
+    <text x="105" y="24" fill="#58a6ff" font-size="14" font-weight="700" text-anchor="middle">bist_controller</text>
+    <text x="105" y="48" fill="#8b949e" font-size="11" text-anchor="middle">5 / 7-State FSM Sequencer</text>
+    
+    <!-- State Flow Graphic -->
+    <rect x="20" y="70" width="170" height="28" rx="5" fill="#21262d" stroke="#30363d"/>
+    <text x="105" y="88" fill="#c9d1d9" font-size="11" text-anchor="middle">IDLE (Awaiting bist_start)</text>
+    <path d="M 105 98 L 105 110" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="112" width="170" height="28" rx="5" fill="#21262d" stroke="#30363d"/>
+    <text x="105" y="130" fill="#c9d1d9" font-size="11" text-anchor="middle">INIT / SEED_LOAD</text>
+    <path d="M 105 140 L 105 152" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="154" width="170" height="28" rx="5" fill="#13233a" stroke="#1f6feb"/>
+    <text x="105" y="172" fill="#58a6ff" font-size="11" font-weight="600" text-anchor="middle">TEST_RUN (N Cycles)</text>
+    <path d="M 105 182 L 105 194" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="196" width="170" height="28" rx="5" fill="#21262d" stroke="#30363d"/>
+    <text x="105" y="214" fill="#c9d1d9" font-size="11" text-anchor="middle">FLUSH / SIG_CAPTURE</text>
+    <path d="M 105 224 L 105 236" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="238" width="170" height="28" rx="5" fill="#21262d" stroke="#30363d"/>
+    <text x="105" y="256" fill="#c9d1d9" font-size="11" text-anchor="middle">COMPARE</text>
+    <path d="M 105 266 L 105 278" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <g transform="translate(20, 280)">
+      <rect x="0" y="0" width="80" height="28" rx="5" fill="#0d281e" stroke="#2ea043"/>
+      <text x="40" y="18" fill="#3fb950" font-size="11" font-weight="700" text-anchor="middle">PASS</text>
+      <rect x="90" y="0" width="80" height="28" rx="5" fill="#311016" stroke="#da3633"/>
+      <text x="130" y="18" fill="#f85149" font-size="11" font-weight="700" text-anchor="middle">FAIL</text>
+    </g>
+
+    <!-- Control Outputs Listed -->
+    <text x="20" y="340" fill="#8b949e" font-size="11" font-weight="600">Generated Controls:</text>
+    <text x="25" y="360" fill="#79c0ff" font-size="11" font-family="monospace">• lfsr_en / seed_load</text>
+    <text x="25" y="380" fill="#79c0ff" font-size="11" font-family="monospace">• mac_en / clr</text>
+    <text x="25" y="400" fill="#79c0ff" font-size="11" font-family="monospace">• misr_en / capture</text>
+    <text x="25" y="420" fill="#79c0ff" font-size="11" font-family="monospace">• compare_en</text>
+    <text x="25" y="440" fill="#79c0ff" font-size="11" font-family="monospace">• iso_en / clk_gate</text>
+  </g>
+
+  <!-- 2. Test Pattern Generator (TPG) -->
+  <g transform="translate(315, 135)" filter="url(#dropShadow)">
+    <rect width="210" height="225" rx="8" fill="url(#tpgGrad)" stroke="#a371f7" stroke-width="2"/>
+    <rect width="210" height="34" rx="8" fill="#8957e5" fill-opacity="0.2"/>
+    <text x="105" y="23" fill="#d2a8ff" font-size="14" font-weight="700" text-anchor="middle">lfsr_tpg</text>
+    <text x="105" y="46" fill="#8b949e" font-size="11" text-anchor="middle">Dual 16-bit Fibonacci LFSRs</text>
+
+    <!-- LFSR A -->
+    <rect x="15" y="60" width="180" height="68" rx="6" fill="#160c28" stroke="#8957e5" stroke-width="1.2"/>
+    <text x="25" y="80" fill="#e2c5ff" font-size="12" font-weight="600">LFSR A (op_a[15:0])</text>
+    <text x="25" y="98" fill="#8b949e" font-size="10" font-family="monospace">Poly: 0xD008 (x¹⁶+x¹⁵+x¹³+x⁴+1)</text>
+    <text x="25" y="114" fill="#8b949e" font-size="10" font-family="monospace">Seed: 0xACE1 | Period: 65535</text>
+
+    <!-- LFSR B -->
+    <rect x="15" y="140" width="180" height="68" rx="6" fill="#160c28" stroke="#8957e5" stroke-width="1.2"/>
+    <text x="25" y="160" fill="#e2c5ff" font-size="12" font-weight="600">LFSR B (op_b[15:0])</text>
+    <text x="25" y="178" fill="#8b949e" font-size="10" font-family="monospace">Poly: 0xB400 (x¹⁶+x¹⁴+x¹³+x¹¹+1)</text>
+    <text x="25" y="194" fill="#8b949e" font-size="10" font-family="monospace">Seed: 0x1234 / 0x1B3D</text>
+  </g>
+
+  <!-- 3. Optional Low-Power Wrapper Interlock (V2-V6) -->
+  <g transform="translate(315, 390)" filter="url(#dropShadow)">
+    <rect width="210" height="200" rx="8" fill="url(#lpGrad)" stroke="#3fb950" stroke-width="2" stroke-dasharray="4,3"/>
+    <rect width="210" height="32" rx="8" fill="#238636" fill-opacity="0.25"/>
+    <text x="105" y="21" fill="#7ee787" font-size="13" font-weight="700" text-anchor="middle">Low-Power Optimizations</text>
+    <text x="105" y="44" fill="#8b949e" font-size="10" text-anchor="middle">Variants 2, 3, 4, 5, 6</text>
+
+    <text x="18" y="68" fill="#3fb950" font-size="11" font-weight="600">V2: Clock Gating (ICG)</text>
+    <text x="25" y="84" fill="#8b949e" font-size="10">• Gated clk for LFSR, MAC, MISR (-4.7% Pwr)</text>
+
+    <text x="18" y="106" fill="#3fb950" font-size="11" font-weight="600">V3: Operand Isolation (OI)</text>
+    <text x="25" y="122" fill="#8b949e" font-size="10">• AND-mask drives 0s to MAC (-5.7% Pwr)</text>
+
+    <text x="18" y="144" fill="#e3b341" font-size="11" font-weight="600">V6: Combined OI + CG (Best!)</text>
+    <text x="25" y="160" fill="#7ee787" font-size="10" font-weight="600">• -10.1% Pwr | -4.9% Cells | -2.7% Area</text>
+    
+    <text x="18" y="180" fill="#f85149" font-size="10">V4: Bus Invert (+48.1% Pwr — Excluded)</text>
+  </g>
+
+  <!-- 4. Circuit Under Test (MAC Core) -->
+  <g transform="translate(570, 135)" filter="url(#dropShadow)">
+    <rect width="220" height="225" rx="8" fill="url(#cutGrad)" stroke="#2ea043" stroke-width="2.5"/>
+    <rect width="220" height="34" rx="8" fill="#238636" fill-opacity="0.2"/>
+    <text x="110" y="23" fill="#7ee787" font-size="14" font-weight="700" text-anchor="middle">mac_16bit (CUT)</text>
+    <text x="110" y="46" fill="#8b949e" font-size="11" text-anchor="middle">Circuit Under Test</text>
+
+    <!-- Multiplier -->
+    <rect x="20" y="60" width="180" height="60" rx="6" fill="#08211b" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="110" y="85" fill="#aff5b4" font-size="12" font-weight="700" text-anchor="middle">16 × 16 Unsigned Multiplier</text>
+    <text x="110" y="105" fill="#8b949e" font-size="10" font-family="monospace" text-anchor="middle">product = op_a × op_b (32b)</text>
+
+    <!-- Accumulator -->
+    <rect x="20" y="132" width="180" height="76" rx="6" fill="#08211b" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="110" y="155" fill="#aff5b4" font-size="12" font-weight="700" text-anchor="middle">Synchronous Accumulator</text>
+    <text x="110" y="175" fill="#8b949e" font-size="10" font-family="monospace" text-anchor="middle">accum[39:0] += product</text>
+    <text x="110" y="193" fill="#7ee787" font-size="10" text-anchor="middle">Exposes per-cycle product to ORA</text>
+  </g>
+
+  <!-- 5. Output Response Analyzer (MISR) -->
+  <g transform="translate(835, 135)" filter="url(#dropShadow)">
+    <rect width="210" height="225" rx="8" fill="url(#oraGrad)" stroke="#d29922" stroke-width="2"/>
+    <rect width="210" height="34" rx="8" fill="#d29922" fill-opacity="0.2"/>
+    <text x="105" y="23" fill="#e3b341" font-size="14" font-weight="700" text-anchor="middle">misr_ora (32-bit)</text>
+    <text x="105" y="46" fill="#8b949e" font-size="11" text-anchor="middle">Output Response Analyzer</text>
+
+    <!-- Details -->
+    <rect x="15" y="60" width="180" height="145" rx="6" fill="#20130a" stroke="#d29922" stroke-width="1.2"/>
+    <text x="25" y="85" fill="#ffd666" font-size="11" font-weight="600">32-Bit Compaction</text>
+    <text x="25" y="105" fill="#8b949e" font-size="10" font-family="monospace">Poly: x³²+x²²+x²+x+1</text>
+    <text x="25" y="123" fill="#8b949e" font-size="10" font-family="monospace">Tap: 0x80200003</text>
+    
+    <text x="25" y="150" fill="#ffd666" font-size="11" font-weight="600">Aliasing Probability:</text>
+    <text x="25" y="168" fill="#aff5b4" font-size="11" font-family="monospace">P_alias ≈ 2⁻³²</text>
+    <text x="25" y="186" fill="#aff5b4" font-size="10" font-family="monospace">≈ 2.33 × 10⁻¹⁰</text>
+  </g>
+
+  <!-- 6. Golden Reg & Signature Comparator -->
+  <g transform="translate(570, 390)" filter="url(#dropShadow)">
+    <rect width="475" height="200" rx="8" fill="url(#cmpGrad)" stroke="#f0883e" stroke-width="2"/>
+    <rect width="475" height="32" rx="8" fill="#d29922" fill-opacity="0.2"/>
+    <text x="237" y="22" fill="#ffa657" font-size="14" font-weight="700" text-anchor="middle">Signature Evaluation Engine</text>
+
+    <!-- Golden Sig Reg -->
+    <rect x="20" y="50" width="195" height="128" rx="6" fill="#1b1206" stroke="#f0883e" stroke-width="1.2"/>
+    <text x="30" y="75" fill="#ffc680" font-size="12" font-weight="600">golden_signature_reg</text>
+    <text x="30" y="98" fill="#8b949e" font-size="10">RTL Golden (N=256):</text>
+    <text x="30" y="116" fill="#79c0ff" font-size="11" font-family="monospace" font-weight="700">0x036CE3D3</text>
+    <text x="30" y="138" fill="#8b949e" font-size="10">Gate Netlist (N=4096):</text>
+    <text x="30" y="156" fill="#7ee787" font-size="11" font-family="monospace" font-weight="700">0x1F5FAF38</text>
+
+    <!-- Signature Comparator -->
+    <rect x="245" y="50" width="210" height="128" rx="6" fill="#1b1206" stroke="#f0883e" stroke-width="1.2"/>
+    <text x="255" y="75" fill="#ffc680" font-size="12" font-weight="600">signature_comparator</text>
+    <text x="255" y="98" fill="#8b949e" font-size="11">Captured MISR == Golden ?</text>
+    
+    <rect x="255" y="115" width="85" height="26" rx="4" fill="#0d281e" stroke="#2ea043"/>
+    <text x="297" y="132" fill="#3fb950" font-size="11" font-weight="700" text-anchor="middle">bist_pass</text>
+
+    <rect x="355" y="115" width="85" height="26" rx="4" fill="#311016" stroke="#da3633"/>
+    <text x="397" y="132" fill="#f85149" font-size="11" font-weight="700" text-anchor="middle">bist_fail</text>
+
+    <text x="255" y="162" fill="#8b949e" font-size="10">Single-cycle comparison</text>
+  </g>
+
+  <!-- Connective Arrows & Data Flow -->
+  <!-- Controller to LFSR -->
+  <path d="M 270 200 L 315 200" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="280" y="192" fill="#58a6ff" font-size="10" font-family="monospace">lfsr_en</text>
+
+  <!-- Controller to MAC -->
+  <path d="M 270 230 L 570 230" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="222" fill="#58a6ff" font-size="10" font-family="monospace">mac_en / clr</text>
+
+  <!-- Controller to MISR -->
+  <path d="M 270 160 L 835 160" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="700" y="152" fill="#58a6ff" font-size="10" font-family="monospace">misr_en</text>
+
+  <!-- TPG to MAC Operands -->
+  <path d="M 525 210 L 570 210" stroke="#bc8cff" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+  <text x="532" y="202" fill="#d2a8ff" font-size="11" font-family="monospace">op_a, op_b [15:0]</text>
+
+  <!-- MAC to MISR Product -->
+  <path d="M 790 210 L 835 210" stroke="#3fb950" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <text x="795" y="202" fill="#7ee787" font-size="11" font-family="monospace">mac_out[31:0]</text>
+
+  <!-- MISR to Comparator -->
+  <path d="M 940 360 L 940 440 L 880 440" stroke="#d29922" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <text x="948" y="405" fill="#ffd666" font-size="10" font-family="monospace">misr_sig[31:0]</text>
+
+  <!-- Comparator Feedback to Controller -->
+  <path d="M 815 570 L 165 570 L 165 500" stroke="#d29922" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowOrange)"/>
+  <text x="350" y="563" fill="#ffd666" font-size="10" font-family="monospace">signature_match (comb_match)</text>
+</svg>

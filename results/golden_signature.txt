@@ -1,0 +1,31 @@
+#==============================================================================
+# MAC BIST Golden Reference Signatures & Analysis
+# Project: Low-Power Aware BIST Architecture for 16-bit MAC
+#==============================================================================
+
+[RTL Simulation Golden Reference]
+Environment      : ModelSim / Questa / NCLaunch (Behavioral Simulation)
+Pattern Length   : 256 test cycles
+LFSR Seeds       : SEED_A = 0xACE1, SEED_B = 0x1234
+LFSR Polynomials : Poly A = 0xD008 (x^16 + x^15 + x^13 + x^4 + 1)
+                   Poly B = 0xB400 (x^16 + x^14 + x^13 + x^11 + 1)
+MISR Spec        : 32-bit Fibonacci / Galois, Tap Mask = 0x80200003
+                   Poly = x^32 + x^22 + x^2 + x + 1
+Aliasing Prob    : 2^-32 ~= 2.33 x 10^-10
+Golden Signature : 0x036ce3d3
+
+[Gate-Level Netlist Fault Simulation Golden Reference]
+Environment      : Cadence Incisive / NCSim (Post-Synthesis Netlist, slow_vdd1v0.lib)
+Pattern Length   : 4096 test cycles
+LFSR Seeds       : SEED_A = 0xACE1, SEED_B = 0x1B3D
+LFSR Polynomials : Poly A = 0xB400 (x^16 + x^14 + x^13 + x^11 + 1)
+                   Poly B = 0xD008 (x^16 + x^15 + x^13 + x^4 + 1)
+MISR Spec        : 32-bit Galois MISR, Poly Mask = 0x00400007
+                   Poly = x^32 + x^22 + x^2 + x + 1
+Golden Signature : 0x1F5FAF38
+
+[Note on Technical Discrepancy]
+The two golden signatures correspond to two distinct verification targets:
+1. Behavioral RTL regression (N = 256 cycles) verified via ModelSim / Questa: 0x036ce3d3
+2. Full gate-level stuck-at fault campaign (N = 4096 cycles) in Cadence Incisive: 0x1F5FAF38
+Both values are validated by exact simulation and are hardcoded into their respective test flows.

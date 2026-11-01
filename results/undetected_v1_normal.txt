@@ -1,0 +1,2 @@
+fault_id=1  SA1  en
+fault_id=2  SA0  clr
