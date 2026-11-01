@@ -1,0 +1,61 @@
+# do run_sim.tcl
+# 
+#     tb_mac_bist_v1
+#     tb_mac_bist_v2
+#     tb_mac_bist_v3
+#     tb_mac_bist_v4
+#     tb_mac_bist_v5
+# 
+# vsim -c -voptargs="+acc" tb_mac_bist_v1 
+# Start time: 23:50:33 on Sep 20,2026
+# Loading work.tb_mac_bist_v1
+# Loading work.mac_bist_top_v1
+# Loading work.bist_controller
+# Loading work.lfsr_tpg
+# Loading work.mac_16bit
+# Loading work.misr_ora
+# Loading work.golden_signature_reg
+# Loading work.signature_comparator
+# [misr_ora] INFO: MISR width = 32 bits
+# [misr_ora] INFO: TAP_MASK = 0x80200003
+# [golden_sig_reg] INFO: Golden signature = 0x036ce3d3
+# =============================================================
+# [TB_V1] Starting Variant 1 (Baseline) Verification
+# =============================================================
+# 
+# --- TEST 1: Reset Behavior ---
+# [TB_V1] PASS: Reset behavior verified.
+# 
+# --- TEST 2: MAC Known-Answer Test ---
+# [TB_V1] PASS: MAC 0xFFFF * 0xFFFF = 0xfffe0001
+# 
+# --- TEST 3: LFSR Sequence Check ---
+# [sig_cmp] t=2775000 PASS: MISR=0x036ce3d3 matches golden=0x036ce3d3
+# [TB_V1] PASS: LFSR sequence valid (63/63 non-zero, no repeats)
+# 
+# --- TEST 4: MISR Operation ---
+# [sig_cmp] t=5455000 PASS: MISR=0x036ce3d3 matches golden=0x036ce3d3
+# [TB_V1] PASS: MISR actively updates (0xa52d6a5b -> 0xd73bb8c3)
+# 
+# --- TEST 5: Golden Signature & Fault-Free BIST ---
+# [sig_cmp] t=8135000 PASS: MISR=0x036ce3d3 matches golden=0x036ce3d3
+# [TB_V1] Captured MISR Signature = 0x036ce3d3
+# [TB_V1] PASS: Golden signature matches expected 0x036ce3d3 exactly!
+# [TB_V1] PASS: Fault-free BIST PASS asserted.
+# 
+# --- TEST 6: Fault Injection (mac_out[0] SA0) ---
+# [sig_cmp] t=10845000 FAIL: MISR=0x88e54d6b != golden=0x036ce3d3
+# [TB_V1] PASS: Fault detected! Faulty signature=0x88e54d6b, bist_fail=1
+# 
+# --- TEST 7: Regression After Fault Removal ---
+# [sig_cmp] t=13535000 PASS: MISR=0x036ce3d3 matches golden=0x036ce3d3
+# [TB_V1] PASS: Regression passed cleanly.
+# 
+# =============================================================
+# [TB_V1] SUMMARY: 8 PASSED, 0 FAILED
+# =============================================================
+# [TB_V1] ALL TESTS PASSED!
+# ** Note: $finish    : ../../tb/tb_mac_bist_v1.v(298)
+#    Time: 13555 ns  Iteration: 1  Instance: /tb_mac_bist_v1
+# End time: 23:50:34 on Sep 20,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
